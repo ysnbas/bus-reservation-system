@@ -1,0 +1,59 @@
+﻿.togglePage {
+    display: flex;
+    margin-top: 40px;
+    justify-content:center;
+}
+.active {
+    background: #cfecff !important;
+}
+.loginPage,.registerPage{
+    padding: 14px;
+    background: #c1c1c1;
+    cursor: pointer;
+    border-radius: 3px;
+    transition: 0.3s;
+}
+.forms {
+    display: flex;
+    justify-content: center;
+}
+
+.loginForm {
+    display: flex;
+}
+.loginForm .loginCard {
+    display: flex;
+    flex-direction: column;
+    background: #0098ff30;
+    padding: 32px;
+    border-radius: 6px;
+}
+.loginForm .loginCard h1{
+    margin-bottom:20px;
+    text-align:center;
+}
+.loginForm .loginCard .buttons{
+    display:flex;
+    justify-content: center;
+    gap: 6px;
+}
+
+.signUpForm {
+    display: none;
+}
+.signUpForm .signUpCard {
+    display: flex;
+    flex-direction: column;
+    background: #0098ff30;
+    padding: 32px;
+    border-radius: 6px;
+}
+.signUpForm .signUpCard h1{
+    margin-bottom:20px;
+    text-align:center;
+}
+.signUpForm .signUpCard .buttons{
+    display:flex;
+    justify-content: center;
+    gap: 6px;
+}

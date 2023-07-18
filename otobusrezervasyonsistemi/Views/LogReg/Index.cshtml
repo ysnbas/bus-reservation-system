@@ -1,0 +1,65 @@
+﻿@{
+    Layout = "";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - otobusrezervasyonsistemi</title>
+    <Link rel="stylesheet" href="/css/login.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/otobusrezervasyonsistemi.styles.css" asp-append-version="true" />
+</head>
+<body>
+        <main role="main" class="pb-3">
+            <div class="togglePage">
+                <div class="loginPage active" id="loginPage" onclick="loginPage()">Login</div>
+                <div class="registerPage" id="registerPage" onclick="registerPage()">Register</div>
+            </div>
+            <div class="forms">
+                <form class="loginForm" id="loginForm" >
+                    <div class="loginCard">
+                        <h1>Giriş</h1>
+                        <div class="mb-3">
+                            <label for="girisKAdı" class="form-label">Kullanıcı Adı</label>
+                        <input type="text" class="form-control" id="girisKAdı" aria-describedby="emailHelp">
+                        </div>
+                        <div class="mb-3">
+                            <label for="girisSifre" class="form-label">Şifre</label>
+                        <input type="password" class="form-control" id="girisSifre">
+                        </div>
+                        <div class="buttons">
+                            <button type="submit" class="btn btn-primary">Giriş</button>
+                        </div>
+                    </div>
+                </form>
+            <form class="signUpForm" id="registerForm">
+                <div class="signUpCard">
+                    <h1>Kayıt Ol</h1>
+                    <div class="mb-3">
+                        <label for="kayitKAdı" class="form-label">Kullanıcı Adı</label>
+                        <input type="text" class="form-control" id="kayitKAdı" aria-describedby="emailHelp">
+                    </div>
+                    <div class="mb-3">
+                        <label for="kayitEmail" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="kayitEmail">
+                    </div>
+                    <div class="mb-3">
+                        <label for="kayitSifre" class="form-label">Şifre</label>
+                        <input type="password" class="form-control" id="kayitSifre">
+                    </div>
+                    <div class="buttons">
+                        <button type="button" class="btn btn-success">Kayıt Ol</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        </main>
+        <script src="/js/loginRegister.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+</html>

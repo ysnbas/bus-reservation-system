@@ -1,0 +1,19 @@
+﻿.ticketInfo, .passengerInfo {
+    padding: 30px;
+    background: white;
+    border-radius: 6px;
+    box-shadow: 0 4px #b4b2b2;
+}
+.ticketInfo table tr th{
+    font-size:20px;
+}
+.ticketInfo table tr td{
+    font-size:18px;
+}
+.title {
+    text-align: center;
+    border-bottom: 1px solid;
+    font-size:25px;
+    font-weight:500;
+    padding-bottom:5px;
+}

@@ -4,11 +4,11 @@ using System.Diagnostics;
 
 namespace otobusrezervasyonsistemi.Controllers
 {
-    public class HomeController : Controller
+    public class TicketController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<TicketController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public TicketController(ILogger<TicketController> logger)
         {
             _logger = logger;
         }

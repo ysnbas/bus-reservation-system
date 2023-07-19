@@ -1,0 +1,13 @@
+﻿.listContainer {
+    background: #ffffff;
+    box-shadow: 0 4px #b4b2b2;
+    border-radius: 6px;
+}
+
+.content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 13px;
+    margin: 1em 0;
+}

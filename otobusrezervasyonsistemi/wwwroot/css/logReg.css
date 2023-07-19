@@ -1,4 +1,11 @@
-﻿.togglePage {
+﻿.title {
+    text-align: center;
+    font-weight: bold;
+    margin-top: 40px;
+    font-size: 72px;
+    font-family: initial;
+}
+.togglePage {
     display: flex;
     margin-top: 40px;
     justify-content:center;
@@ -6,9 +13,9 @@
 .active {
     background: #cfecff !important;
 }
-.loginPage,.registerPage{
+.loginPage, .registerPage {
     padding: 14px;
-    background: #c1c1c1;
+    background: #c1c1c147;
     cursor: pointer;
     border-radius: 3px;
     transition: 0.3s;
@@ -56,4 +63,23 @@
     display:flex;
     justify-content: center;
     gap: 6px;
+}
+.inputRow{
+    display:flex;
+    gap:20px;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background: #cfecff;
+    padding: 0px 12px;
+}
+
+.footer p{
+    color:black !important;
 }

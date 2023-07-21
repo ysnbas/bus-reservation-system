@@ -6,10 +6,22 @@
 
 <div class="listContainer">
     <div class="content">
-        <div><img src="/common/bus.png" width="24" height="24" />Kamil Koç</div>
-        <div><img src="/common/clock.png" width="24" height="24"/> 00:05</div>
-        <div><img src="/common/tag.png" width="24" height="24"/> 1500 TL</div>
-        <div><img src="/common/ticket.png" width="24" height="24" /> 10 adet </div>
-        <div><a href="/Ticket/Index"><button class="btn btn-outline-primary">Koltuk Seç</button></a></div>
+        <div class="bus"><img src="/common/bus.png" width="48" height="48" /><span class="busName">Kamil Koç</span></div>
+        <div class="bus"><img src="/common/clock.png" width="24" height="24" /> <span class="busInfoText">00:05</span></div>
+        <div class="bus"><img src="/common/tag.png" width="24" height="24" /><span class="busInfoText">1500 TL</span></div>
+        <div class="bus"><img src="/common/ticket.png" width="24" height="24" /><span class="busInfoText">10 adet</span></div>
+        <div class="bus"><a><button class="btn btn-outline-primary" id="openModalBtn">Koltuk Seç</button></a></div>
+        <div id="modalContainer" class="modal">
+            <div class="modal-content">
+                <span id="closeModalBtn" class="close">&times;</span>
+                <h2>Koltuk Seçimi</h2>
+                <div class="armchair">
+                    <div class="seats-container"></div>
+                </div>
+                <a href="/Ticket/Index"><button class="btn btn-primary">Devam Et</button></a>
+            </div>
+        </div>
     </div>
 </div>
+
+<script src="~/js/busList.js"></script>

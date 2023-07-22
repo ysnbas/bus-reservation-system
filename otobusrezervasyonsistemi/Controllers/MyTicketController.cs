@@ -2,7 +2,7 @@
 
 namespace otobusrezervasyonsistemi.Controllers
 {
-    public class BusArmchairController : Controller
+    public class MyTicketController : Controller
     {
         public IActionResult Index()
         {

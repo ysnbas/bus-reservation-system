@@ -1,0 +1,68 @@
+﻿@model otobusrezervasyonsistemi.Models.AddRoute
+
+@{
+    Layout = "_AdminLayout";
+    ViewData["title"] = "Güzergah Ekle";
+}
+
+
+<div class="container">
+    <form asp-controller="Routes" asp-action="Index">
+        <h2>Güzergah Ekle</h2>
+
+        <div class="row mb-3">
+            <div class="col-md-4">
+                <select asp-for="BusName" class="form-control">
+                    <option value="" selected disabled hidden>Otobüs Seç</option>
+                    <option>Kamil Koç</option>
+                    <option>Metro</option>
+                    <option>Huzur</option>
+                </select>
+                <span style="color:red;" asp-validation-for="BusName"></span>
+            </div>
+            <div class="col-md-4">
+                <select asp-for="Departure" class="form-control">
+                    <option value="" selected disabled hidden>Gidiş Seç</option>
+                    <option>Ankara</option>
+                    <option>İstanbul</option>
+                    <option>İzmir</option>
+                </select>
+                <span style="color:red;" asp-validation-for="Departure"></span>
+            </div>
+            <div class="col-md-4">
+                <select asp-for="Arrival" class="form-control">
+                    <option value="" selected disabled hidden>Varış Seç</option>
+                    <option>Ankara</option>
+                    <option>İstanbul</option>
+                    <option>İzmir</option>
+                </select>
+                <span style="color:red;" asp-validation-for="Arrival"></span>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="Price">Fiyat</label>
+                    <input class="form-control" name="Price" asp-for="Price">
+                    <span style="color:red;" asp-validation-for="Price"></span>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="Date">Tarih</label>
+                    <input class="form-control" asp-for="Date" name="Date">
+                    <span style="color:red;" asp-validation-for="Date"></span>
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+
+@section Scripts{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

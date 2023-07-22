@@ -13,7 +13,12 @@ window.addEventListener('click', function (event) {
     }
 });
 
+
+// Armchair
 const seats = Array(32).fill('empty');
+const selectedData = [6, 7, 9, 11];
+let userSelectedSeats = [];
+
 
 function renderSeats() {
     const seatsContainer = document.querySelector('.seats-container');
@@ -23,20 +28,47 @@ function renderSeats() {
         const seat = document.createElement('div');
         seat.classList.add('seat', seats[i]);
         seat.innerText = i + 1;
-        seat.addEventListener('click', () => toggleSeat(i));
+
+        if (selectedData.includes(i)) {
+            seat.style.pointerEvents = 'none';
+        } else {
+            seat.addEventListener('click', () => toggleSeat(i));
+        }
+
         seatsContainer.appendChild(seat);
     }
+
+    const continueButton = document.getElementById('forDisabled');
+    continueButton.disabled = userSelectedSeats.length === 0;
 }
 
 function toggleSeat(index) {
     if (seats[index] === 'empty') {
         seats[index] = 'taken';
-    } else {
+        userSelectedSeats.push(index);
+    } else if (seats[index] === 'taken') {
         seats[index] = 'empty';
+        const selectedIndex = userSelectedSeats.indexOf(index);
+        if (selectedIndex !== -1) {
+            userSelectedSeats.splice(selectedIndex, 1);
+        }
     }
     renderSeats();
+
 }
 
 window.onload = () => {
+    selectedData.forEach((index) => {
+        seats[index] = 'taken';
+    });
+
     renderSeats();
+
+    const continueButton = document.getElementById('forDisabled');
+    continueButton.disabled = true;
 };
+
+
+function goRedirect() {
+    window.location.href = '/Ticket/Index';
+}

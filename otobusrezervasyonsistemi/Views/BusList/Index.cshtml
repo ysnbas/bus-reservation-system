@@ -10,6 +10,8 @@
         <div class="bus"><img src="/common/clock.png" width="24" height="24" /> <span class="busInfoText">00:05</span></div>
         <div class="bus"><img src="/common/tag.png" width="24" height="24" /><span class="busInfoText">1500 TL</span></div>
         <div class="bus"><img src="/common/ticket.png" width="24" height="24" /><span class="busInfoText">10 adet</span></div>
+        <div class="bus"><img src="/common/location.png" width="24" height="24" /><span class="busInfoText">Ankara</span></div>
+        <div class="bus"><img src="/common/location (1).png" width="24" height="24" /><span class="busInfoText">İstanbul</span></div>
         <div class="bus"><a><button class="btn btn-outline-primary" id="openModalBtn">Koltuk Seç</button></a></div>
         <div id="modalContainer" class="modal">
             <div class="modal-content">
@@ -18,7 +20,7 @@
                 <div class="armchair">
                     <div class="seats-container"></div>
                 </div>
-                <a href="/Ticket/Index"><button class="btn btn-primary">Devam Et</button></a>
+                <button type="submit" id="forDisabled" class="btn btn-primary" style="width: 100%;" onclick="goRedirect()">Devam Et</button>
             </div>
         </div>
     </div>

@@ -2,8 +2,14 @@
 
 namespace otobusrezervasyonsistemi.Models
 {
-    public class AddRoute
+    public class Routes
     {
+        [Key]
+        public int id { get; set; }
+
+        [Required]
+        public int busID { get; set; }
+
         [Required(ErrorMessage = "Otobüs Seçiniz")]
         public string BusName { get; set; }
         [Required(ErrorMessage = "Gidiş Seçiniz")]

@@ -4,6 +4,9 @@ namespace otobusrezervasyonsistemi.Models
 {
     public class Users
     {
+        [Key]
+        public int id { get; set; }
+
         [Required(ErrorMessage = "Kullanıcı Adı Giriniz")]
         public string Username { get; set; }
 
@@ -14,6 +17,6 @@ namespace otobusrezervasyonsistemi.Models
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Telefon Giriniz")]
-        public int Phone { get; set; }
+        public char Phone { get; set; }
     }
 }

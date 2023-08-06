@@ -2,8 +2,10 @@
 
 namespace otobusrezervasyonsistemi.Models
 {
-    public class AddBus
+    public class Buses
     {
+        [Key]
+        public int id { get; set; }
         [Required(ErrorMessage = "Otobüs Markasını Giriniz")]
         public string BusName { get; set; }
 

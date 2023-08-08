@@ -17,6 +17,11 @@ namespace otobusrezervasyonsistemi.Models
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Telefon Giriniz")]
-        public char Phone { get; set; }
+        [DataType(DataType.PhoneNumber)]
+        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Geçerli Telefon Değil")]
+        public string Phone { get; set; }
+
+        [Required]
+        public bool isAdmin { get; set; }
     }
 }

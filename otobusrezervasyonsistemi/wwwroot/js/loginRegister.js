@@ -13,3 +13,17 @@ function registerPage() {
     document.getElementById("loginForm").style.display = "none"
     document.getElementById("registerForm").style.display = "flex"
 }
+
+var modal = document.getElementById("modalContainer");
+modal.style.display = "block";
+
+document.getElementById('closeModalBtn').addEventListener('click', function () {
+    document.getElementById('modalContainer').style.display = 'none';
+});
+
+window.addEventListener('click', function (event) {
+    var modal = document.getElementById('modalContainer');
+    if (event.target === modal) {
+        modal.style.display = 'none';
+    }
+});

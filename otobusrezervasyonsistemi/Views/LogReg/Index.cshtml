@@ -21,7 +21,7 @@
                 <div class="registerPage" id="registerPage" onclick="registerPage()">Kayıt</div>
             </div>
             <div class="forms">
-                <form asp-controller="BusList" class="loginForm" id="loginForm" asp-action="Index">
+            <form asp-controller="LogReg" class="loginForm" id="loginForm" method="post" asp-action="Index">
                     <div class="loginCard">
                         <h1>Giriş</h1>
                         <div class="mb-3">
@@ -39,7 +39,7 @@
                         </div>
                     </div>
                 </form>
-            <form asp-controller="LogReg" class="signUpForm" id="registerForm" asp-action="Index">
+            <form asp-controller="LogReg" class="signUpForm" id="registerForm" asp-action="Register">
                 <div class="signUpCard">
                     <h1>Kayıt</h1>
                     <div class="inputRow">
@@ -72,6 +72,17 @@
                 </div>
             </form>
         </div>
+
+       
+            @if (ViewData["ValidateMessage"] != null)
+            {
+            <div id="modalContainer" class="modal">
+                <div class="modal-content">
+                    <span id="closeModalBtn" class="close">&times;</span>
+                    @ViewData["ValidateMessage"]
+                </div>
+            </div>
+            }
            
         </main>
     <footer class="footer">

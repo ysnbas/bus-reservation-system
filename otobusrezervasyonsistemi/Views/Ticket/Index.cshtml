@@ -1,4 +1,4 @@
-﻿@model otobusrezervasyonsistemi.Models.Passengers
+﻿@model otobusrezervasyonsistemi.Models.Tickets
 @{
     ViewData["Title"] = "Bilet";
 }
@@ -8,59 +8,99 @@
 <div class="ticketContainer">
     <div class="content">
         <div class="row">
-            <div class="col-8">
+            <div class="col-12">
+                <form asp-action="Index" asp-controller="Ticket" method="post">
                 <div class="ticketInfo">
                     <div class="title">Güzergah/Otobüs Bilgisi</div>
-                    <table width="100%">
-                        <tbody>
-                            <tr>
-                                <th>Otobüs</th>
-                            </tr>
-                            <tr>
-                                <td>Kamil KOÇ</td>
-                            </tr>
-                            <tr>
-                                <th>Kalkış</th>
-                                <th>Varış</th>
-                            </tr>
-                            <tr>
-                                <td>Alibeyköy</td>
-                                <td>Ankara</td>
-                            </tr>
-                            <tr>
-                                <th>Hareket Zamanı</th>
-                                <th>Koltuk</th>
-                            </tr>
-                            <tr>
-                                <td>20 Temmuz</td>
-                                <td>35, 36</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="busname">Otobüs</label>
+                                        <input asp-for="busname" name="busname" id="busname" class="form-control" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="price">Fiyat</label>
+                                        <input asp-for="price" name="price" id="price" class="form-control" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="kalkis">Kalkış</label>
+                                        <input asp-for="kalkis" name="kalkis" id="kalkis" class="form-control" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="varis">Varış</label>
+                                        <input asp-for="varis" name="varis" id="varis" class="form-control" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="biletTarihi">Hareket Zamanı</label>
+                                        <input asp-for="biletTarihi" name="biletTarihi" id="date" class="form-control" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="armchairNo">Koltuk</label>
+                                        <input asp-for="armchairNo" name="armchairNo" id="armchair" class="form-control" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <input type="hidden" id="userId" asp-for="userID" name="userID"/>
+                <button type="submit" class="btn btn-primary">Satın Al</button>
                 </div>
-            </div>
-            <div class="col-4">
-                <div class="passengerInfo">
-                    <div class="title">Yolcu Bilgisi</div>
-                    <form asp-controller="MyTicket" asp-action="Index">
-                    <div class="mb-3">
-                        <label asp-for="PassengerName" class="form-label">Ad Soyad</label>
-                        <input asp-for="PassengerName" class="form-control" name="PassengerName">
-                        <span style="color:red;" asp-validation-for="PassengerName"></span>
-                    </div>
-                    <div class="mb-3">
-                        <label asp-for="TCNo" class="form-label">TC</label>
-                        <input asp-for="TCNo" class="form-control" name="TCNo">
-                        <span style="color:red;" asp-validation-for="TCNo"></span>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Satın Al</button>
-                    </form>
-                </div>
+
+                </form>
             </div>
         </div>
         
     </div>
 </div>
+
+<script>
+    const armChair = localStorage.getItem('selectedSeat')
+    var storedTravelInfo = localStorage.getItem("selectedTravel");
+    var travelInfo = JSON.parse(storedTravelInfo);
+    document.getElementById('date').value = travelInfo.date;
+    document.getElementById('kalkis').value = travelInfo.departure;
+    document.getElementById('varis').value = travelInfo.arrival;
+    document.getElementById('busname').value = travelInfo.busName;
+    document.getElementById('price').value = travelInfo.price;
+
+    document.getElementById("armchair").value = armChair; 
+
+    var userIdCookie = getCookie("userId");
+
+    if (userIdCookie !== null) {
+        document.getElementById("userId").value = userIdCookie;
+    }
+
+    function getCookie(name) {
+        var nameEQ = name + "=";
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i];
+            while (cookie.charAt(0) == ' ') {
+                cookie = cookie.substring(1, cookie.length);
+            }
+            if (cookie.indexOf(nameEQ) == 0) {
+                return cookie.substring(nameEQ.length, cookie.length);
+            }
+        }
+        return null;
+    }
+
+</script>
 
 @section Scripts{
     @{

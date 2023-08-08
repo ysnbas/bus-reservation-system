@@ -1,4 +1,4 @@
-﻿@model otobusrezervasyonsistemi.Models.Routes
+﻿@model otobusrezervasyonsistemi.Models.AddRouteViewModel;
 
 @{
     Layout = "_AdminLayout";
@@ -7,62 +7,116 @@
 
 
 <div class="container">
-    <form asp-controller="Routes" asp-action="Index">
+    <form asp-controller="Admin" asp-action="AddRoute" id="addRoute" method="post">
         <h2>Güzergah Ekle</h2>
 
         <div class="row mb-3">
             <div class="col-md-4">
-                <select asp-for="BusName" class="form-control">
+                <select id="busSelect" class="form-control">
                     <option value="" selected disabled hidden>Otobüs Seç</option>
-                    <option>Kamil Koç</option>
-                    <option>Metro</option>
-                    <option>Huzur</option>
+                   @foreach (var item in Model.Buses)
+                    {
+                        <option value="@item.id-@item.BusName">@Html.DisplayFor(Model=>item.BusName)</option>
+                    }
                 </select>
-                <span style="color:red;" asp-validation-for="BusName"></span>
+                <span style="color:red;" asp-validation-for="Route.BusName"></span>
             </div>
             <div class="col-md-4">
-                <select asp-for="Departure" class="form-control">
+                <select id="departureSelect" class="form-control">
                     <option value="" selected disabled hidden>Gidiş Seç</option>
-                    <option>Ankara</option>
-                    <option>İstanbul</option>
-                    <option>İzmir</option>
                 </select>
-                <span style="color:red;" asp-validation-for="Departure"></span>
+                <span style="color:red;" id="departureValidation"></span>
             </div>
             <div class="col-md-4">
-                <select asp-for="Arrival" class="form-control">
+                <select id="arrivalSelect" class="form-control">
                     <option value="" selected disabled hidden>Varış Seç</option>
-                    <option>Ankara</option>
-                    <option>İstanbul</option>
-                    <option>İzmir</option>
                 </select>
-                <span style="color:red;" asp-validation-for="Arrival"></span>
+                <span style="color:red;" id="arrivalValidation"></span>
             </div>
         </div>
 
         <div class="row mb-3">
             <div class="col-md-6">
                 <div class="form-group">
-                    <label asp-for="Price">Fiyat</label>
-                    <input class="form-control" name="Price" asp-for="Price">
-                    <span style="color:red;" asp-validation-for="Price"></span>
+                    <label asp-for="Route.Price">Fiyat</label>
+                    <input class="form-control" name="Route.Price" asp-for="Route.Price">
+                    <span style="color:red;" asp-validation-for="Route.Price"></span>
                 </div>
             </div>
 
             <div class="col-md-6">
                 <div class="form-group">
-                    <label asp-for="Date">Tarih</label>
-                    <input class="form-control" asp-for="Date" name="Date">
-                    <span style="color:red;" asp-validation-for="Date"></span>
+                    <label asp-for="Route.Date">Tarih</label>
+                    <input type="date" class="form-control" id="datePicker" asp-for="Route.Date" name="Route.Date">
+                    <span style="color:red;" asp-validation-for="Route.Date"></span>
                 </div>
             </div>
         </div>
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="Route.Ticket">Bilet</label>
+                    <input class="form-control" name="Route.Ticket" asp-for="Route.Ticket">
+                    <span style="color:red;" asp-validation-for="Route.Ticket"></span>
+                </div>
+            </div>
+          
+        </div>
+        <input type="hidden" asp-for="Route.BusName" id="selectedBusInput" name="Route.BusName" >
+        <input type="hidden" asp-for="Route.Departure" id="selectedDepartureInput" name="Route.Departure">
+        <input type="hidden" asp-for="Route.Arrival" id="selectedArrivalInput" name="Route.Arrival">
+        <input type="hidden" asp-for="Route.busID" id="selectedBusId" name="Route.busID">
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>
+
+<script>
+    fetch('https://gist.githubusercontent.com/ozdemirburak/4821a26db048cc0972c1beee48a408de/raw/4754e5f9d09dade2e6c461d7e960e13ef38eaa88/cities_of_turkey.json')
+        .then(response => response.json())
+        .then(data => {
+            const departureSelect = document.getElementById('departureSelect');
+            const arrivalSelect = document.getElementById('arrivalSelect');
+
+            data.forEach(city => {
+                var departureOption = new Option(city.name, city.name);
+                var arrivalOption = new Option(city.name, city.name);
+
+                departureSelect.appendChild(departureOption);
+                arrivalSelect.appendChild(arrivalOption);
+            });
+        })
+        .catch(error => {
+            console.error('JSON verileri çekilemedi:', error);
+        });
+
+
+    busSelect.addEventListener("change", function () {
+        const selectedValue = this.value;
+        var parts = selectedValue.split("-");
+        var id = parts[0];
+        var busName = parts[1];
+
+        document.getElementById('selectedBusId').value = id
+        document.getElementById('selectedBusInput').value = busName
+
+    });
+    departureSelect.addEventListener("change", function () {
+        const selectedValue = this.value;
+        document.getElementById('selectedDepartureInput').value = selectedValue
+    });
+    arrivalSelect.addEventListener("change", function () {
+        const selectedValue = this.value;
+        document.getElementById('selectedArrivalInput').value = selectedValue
+    });
+
+
+    document.getElementById("datePicker").addEventListener("change", function () {
+        var selectedDate = this.value;
+    });
+</script>
 
 @section Scripts{
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
-    }
+}

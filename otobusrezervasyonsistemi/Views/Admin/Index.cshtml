@@ -1,17 +1,22 @@
-﻿@{
+﻿@model IEnumerable<otobusrezervasyonsistemi.Models.Routes>
+@{
     Layout = "_AdminLayout";
     ViewData["title"] = "Güzergahlar";
 }
 
 <link rel="stylesheet" href="~/css/MyTicket.css" /> 
+    @foreach (var item in Model)
+    {
 <div class="listContainer">
-    <div class="content">
-        <div class="bus"><img src="/common/bus.png" width="48" height="48" /><span class="busName">Kamil Koç</span></div>
-        <div class="bus"><img src="/common/clock.png" width="24" height="24" /> <span class="busInfoText">00:05</span></div>
-        <div class="bus"><img src="/common/tag.png" width="24" height="24" /><span class="busInfoText">1500 TL</span></div>
-        <div class="bus"><img src="/common/location.png" width="24" height="24" /><span class="busInfoText">Ankara</span></div>
-        <div class="bus"><img src="/common/location (1).png" width="24" height="24" /><span class="busInfoText">İstanbul</span></div>
-        <div class="bus"><a><button class="btn btn-danger"><span>Sil</span></button></a></div>
-        <div class="bus"><a href="Admin/Update"><button class="btn btn-success"><span>Güncelle</span></button></a></div>
+        <div class="content">
+        <div class="bus"><img src="/common/bus.png" width="48" height="48" /><span class="busName">@Html.DisplayFor(Model=>item.BusName)</span></div>
+        <div class="bus"><img src="/common/clock.png" width="24" height="24" /> <span class="busInfoText">@Html.DisplayFor(Model=>item.Date)</span></div>
+        <div class="bus"><img src="/common/tag.png" width="24" height="24" /><span class="busInfoText">@Html.DisplayFor(Model=>item.Price) TL</span></div>
+        <div class="bus"><img src="/common/location.png" width="24" height="24" /><span class="busInfoText">@Html.DisplayFor(Model=>item.Departure)</span></div>
+        <div class="bus"><img src="/common/location (1).png" width="24" height="24" /><span class="busInfoText">@Html.DisplayFor(Model=>item.Arrival)</span></div>
+        <div class="bus"><a href="/Admin/DeleteR/@item.id"><button class="btn btn-danger"><span>Sil</span></button></a></div>
+            <div class="bus"><a href="/Admin/EditRoute/@item.id"><button class="btn btn-success"><span>Güncelle</span></button></a></div>
     </div>
 </div>
+    }
+    

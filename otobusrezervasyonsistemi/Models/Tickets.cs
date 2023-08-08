@@ -7,15 +7,21 @@ namespace otobusrezervasyonsistemi.Models
         [Key]
         public int id {  get; set; }
         [Required]
-        public int routeID { get; set; }
+        public string busname { get; set; }
+        [Required]
+        public int price { get; set; }
+        [Required]
+        public string kalkis { get; set; }
+        [Required]
+        public string varis { get; set; }
 
         [Required]
-        public int passengersID { get; set; }
+        public int userID { get; set; }
 
         [Required]
-        public DataType biletTarihi { get; set; }
+        public string biletTarihi { get; set; }
 
         [Required]
-        public int koltukNumarası { get; set; }
+        public int armchairNo { get; set; }
     }
 }

@@ -2,13 +2,19 @@
     Layout = "_AdminLayout";
     ViewData["title"] = "Otobüsler";
 }
+@model IEnumerable<otobusrezervasyonsistemi.Models.Buses>;
 
 <link rel="stylesheet" href="~/css/MyTicket.css" />
+    @foreach (var item in Model)
+    {
 <div class="listContainer">
-    <div class="content">
-        <div class="bus"><img src="/common/bus.png" width="48" height="48" /><span class="busName">Kamil Koç</span></div>
-        <div class="bus"><img src="/common/ticket.png" width="24" height="24" /><span class="busInfoText">35</span></div>
-        <div class="bus"><a><button class="btn btn-danger"><span>Sil</span></button></a></div>
-        <div class="bus"><a href="Admin/UpdateBus"><button class="btn btn-success"><span>Güncelle</span></button></a></div>
-    </div>
+        <div class="content">
+            <div class="bus"><img src="/common/bus.png" width="48" height="48" /><span class="busName">@Html.DisplayFor(Model => item.BusName)</span></div>
+            <div class="bus"><img src="/common/ticket.png" width="24" height="24" /><span class="busInfoText">@Html.DisplayFor(Model => item.TotalArmchair)</span></div>
+            <div class="bus">
+                <a href="/Admin/Delete/@item.id"><button type="submit" class="btn btn-danger"><span>Sil</span></button></a>
+            </div>
+            <div class="bus"><a href="/Admin/EditBus/@item.id"><button class="btn btn-success"><span>Güncelle</span></button></a></div>
+        </div>
 </div>
+    }

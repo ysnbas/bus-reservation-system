@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Drawing;
 
 namespace otobusrezervasyonsistemi.Models
 {
@@ -9,6 +10,8 @@ namespace otobusrezervasyonsistemi.Models
 
         [Required]
         public int busID { get; set; }
+        [Required]
+        public int Ticket { get; set; }
 
         [Required(ErrorMessage = "Otobüs Seçiniz")]
         public string BusName { get; set; }
@@ -22,7 +25,6 @@ namespace otobusrezervasyonsistemi.Models
         public int Price { get; set; }
 
         [Required(ErrorMessage = "Yolculuk Tarihini Seçiniz")]
-        public DateTime Date { get; set; }
-
+        public string Date { get; set; }
     }
 }

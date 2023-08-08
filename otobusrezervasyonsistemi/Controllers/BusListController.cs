@@ -15,8 +15,8 @@ namespace otobusrezervasyonsistemi.Controllers
         }
         public IActionResult Index()
         {
-            List<Buses> bus = _dbContext.Buses.ToList();
-            return View(bus);
+            List<Routes> routes = _dbContext.Routes.ToList();
+            return View(routes);
         }
     }
 }

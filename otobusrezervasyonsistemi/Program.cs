@@ -1,5 +1,6 @@
 using otobusrezervasyonsistemi.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,6 +8,16 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<MyDbContext>(options=> options.UseSqlServer(builder.Configuration.GetSection("ConnectionStrings:MyDbContext").Value));
+
+
+builder.Services.AddAuthentication(
+    CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(option => {
+        option.LoginPath = "/LogReg/Index";
+        option.ExpireTimeSpan = TimeSpan.FromMinutes(20);
+
+    });
+
 
 var app = builder.Build();
 

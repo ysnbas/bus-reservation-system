@@ -1,29 +1,138 @@
 ﻿@{
     ViewData["title"] = "Güzergahlar";
 }
-
+@model IEnumerable<otobusrezervasyonsistemi.Models.Routes>;
 <link rel="stylesheet" href="/css/BusList.css" />
 
+    @foreach (var item in Model)
+    {
 <div class="listContainer">
     <div class="content">
-        <div class="bus"><img src="/common/bus.png" width="48" height="48" /><span class="busName">Kamil Koç</span></div>
-        <div class="bus"><img src="/common/clock.png" width="24" height="24" /> <span class="busInfoText">00:05</span></div>
-        <div class="bus"><img src="/common/tag.png" width="24" height="24" /><span class="busInfoText">1500 TL</span></div>
-        <div class="bus"><img src="/common/ticket.png" width="24" height="24" /><span class="busInfoText">10 adet</span></div>
-        <div class="bus"><img src="/common/location.png" width="24" height="24" /><span class="busInfoText">Ankara</span></div>
-        <div class="bus"><img src="/common/location (1).png" width="24" height="24" /><span class="busInfoText">İstanbul</span></div>
-        <div class="bus"><a><button class="btn btn-outline-primary" id="openModalBtn">Koltuk Seç</button></a></div>
-        <div id="modalContainer" class="modal">
+            <div class="bus"><img src="/common/bus.png" width="48" height="48" /><span class="busName">@Html.DisplayFor(Model=>item.BusName)</span></div>
+            <div class="bus"><img src="/common/clock.png" width="24" height="24" /> <span class="busInfoText">@Html.DisplayFor(Model=>item.Date)</span></div>
+            <div class="bus"><img src="/common/tag.png" width="24" height="24" /><span class="busInfoText">@Html.DisplayFor(Model=>item.Price) TL</span></div>
+            <div class="bus"><img src="/common/ticket.png" width="24" height="24" /><span class="busInfoText">@Html.DisplayFor(Model=>item.Ticket) adet</span></div>
+            <div class="bus"><img src="/common/location.png" width="24" height="24" /><span class="busInfoText">@Html.DisplayFor(Model=>item.Departure)</span></div>
+            <div class="bus"><img src="/common/location (1).png" width="24" height="24" /><span class="busInfoText">@Html.DisplayFor(Model=>item.Arrival)</span></div>
+
+        <div class="bus"><a><button class="btn btn-outline-primary" id="openModalBtn_@item.id">Koltuk Seç</button></a></div>
+            <div id="modalContainer_@item.id" class="modal">
             <div class="modal-content">
-                <span id="closeModalBtn" class="close">&times;</span>
+                <span id="closeModalBtn_@item.id" class="close">&times;</span>
                 <h2>Koltuk Seçimi</h2>
                 <div class="armchair">
-                    <div class="seats-container"></div>
+                    <div class="seats-container" id="armchairAdd_@item.id"></div>
                 </div>
                 <button type="submit" id="forDisabled" class="btn btn-primary" style="width: 100%;" onclick="goRedirect()">Devam Et</button>
             </div>
         </div>
+            <script>
+
+                document.getElementById("openModalBtn_@item.id").addEventListener("click", function () {
+                    var travelInfo = {
+                        busName: "@item.BusName",
+                        date: "@item.Date",
+                        price: "@item.Price",
+                        ticket: "@item.Ticket",
+                        departure: "@item.Departure",
+                        arrival: "@item.Arrival"
+                    };
+
+                    localStorage.setItem("selectedTravel", JSON.stringify(travelInfo));
+
+                    document.getElementById('modalContainer_@item.id').style.display = 'block';
+                });
+
+
+                document.getElementById('closeModalBtn_@item.id').addEventListener('click', function () {
+                    document.getElementById('modalContainer_@item.id').style.display = 'none';
+                });
+
+                window.addEventListener('click', function (event) {
+                    var modal = document.getElementById('modalContainer_@item.id');
+                    if (event.target === modal) {
+                        modal.style.display = 'none';
+                    }
+                });
+
+
+
+                // Armchair
+                const seats = Array(32).fill('empty');
+                const selectedData = [6, 7, 9, 11];
+                let userSelectedSeat = null;
+
+                function renderSeats() {
+                    const seatsContainer = document.getElementById('armchairAdd_@item.id');
+                    seatsContainer.innerHTML = '';
+
+                    for (let i = 0; i < seats.length; i++) {
+                        const seat = document.createElement('div');
+
+
+                        seat.classList.add('seat');
+                        if (seats[i] === 'empty') {
+                            seat.classList.add('empty');
+                        } else if (seats[i] === 'taken') {
+                            seat.classList.add('taken');
+                        }
+
+                        if (userSelectedSeat === i) {
+                            seat.classList.add('taken');
+                        } else {
+                            seat.classList.remove('taken');
+                        }
+
+                        seat.innerText = i + 1;
+
+                        if (selectedData.includes(i)) {
+                            seat.style.pointerEvents = 'none';
+                        } else {
+                            seat.addEventListener('click', () => toggleSeat(i));
+                        }
+
+                        seatsContainer.appendChild(seat);
+                    }
+
+                    const continueButton = document.getElementById('forDisabled');
+                    continueButton.disabled = userSelectedSeat === null;
+                }
+
+                function toggleSeat(index) {
+                    if (userSelectedSeat === index) {
+                        userSelectedSeat = null;
+                    } else {
+                        userSelectedSeat = index;
+                    }
+                    renderSeats();
+                }
+
+                function goRedirect() {
+                    if (userSelectedSeat !== null) {
+                        localStorage.setItem('selectedSeat', JSON.stringify(userSelectedSeat));
+
+                        window.location.href = '/Ticket/Index';
+                    }
+                }
+
+                window.onload = () => {
+                    selectedData.forEach((index) => {
+                        seats[index] = 'taken';
+                    });
+
+                    const localStorageData = localStorage.getItem('selectedSeat');
+                    if (localStorageData) {
+                        userSelectedSeat = JSON.parse(localStorageData);
+                    }
+
+                    renderSeats();
+
+                    const continueButton = document.getElementById('forDisabled');
+                    continueButton.disabled = true;
+                };
+            </script>
     </div>
 </div>
+    }
 
 <script src="~/js/busList.js"></script>

@@ -1,7 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 namespace otobusrezervasyonsistemi.Models
 {
-    public class MyDbContext:DbContext
+    public class MyDbContext: DbContext
     {
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options) { }
 

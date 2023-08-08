@@ -1,15 +1,22 @@
 ﻿@{
     ViewData["title"] = "Biletlerim";
 }
-
+@model IEnumerable<otobusrezervasyonsistemi.Models.Tickets>
 <link rel="stylesheet" href="/css/MyTicket.css" />
 
-<div class="listContainer">
+
+@foreach (var item in Model)
+{
+   <div class="listContainer">
     <div class="content">
-        <div class="bus"><img src="/common/bus.png" width="48" height="48" /><span class="busName">Kamil Koç</span></div>
-        <div class="bus"><img src="/common/clock.png" width="24" height="24" /> <span class="busInfoText">00:05</span></div>
-        <div class="bus"><img src="/common/tag.png" width="24" height="24" /><span class="busInfoText">1500 TL</span></div>
-        <div class="bus"><img src="/common/location.png" width="24" height="24" /><span class="busInfoText">Ankara</span></div>
-        <div class="bus"><img src="/common/location (1).png" width="24" height="24" /><span class="busInfoText">İstanbul</span></div>
+            <div class="bus"><img src="/common/bus.png" width="48" height="48" /><span class="busName">@Html.DisplayFor(Model=>item.busname)</span></div>
+            <div class="bus"><img src="/common/clock.png" width="24" height="24" /> <span class="busInfoText">@Html.DisplayFor(Model=>item.biletTarihi)</span></div>
+            <div class="bus"><img src="/common/tag.png" width="24" height="24" /><span class="busInfoText">@Html.DisplayFor(Model=>item.price) TL</span></div>
+            <div class="bus"><img src="/common/location.png" width="24" height="24" /><span class="busInfoText">@Html.DisplayFor(Model=>item.kalkis)</span></div>
+            <div class="bus" style="display:none;"><img src="/common/location.png" width="24" height="24" /><span class="busInfoText">@Html.DisplayFor(Model=>item.userID)</span></div>
+            <div class="bus"><img src="/common/location (1).png" width="24" height="24" /><span class="busInfoText">@Html.DisplayFor(Model=>item.varis)</span></div>
+            <div class="bus"><span>Koltuk No: </span><span class="busInfoText">@Html.DisplayFor(Model=>item.armchairNo)</span></div>
     </div>
 </div>
+ 
+}

@@ -14,6 +14,7 @@ namespace otobusrezervasyonsistemi.Models
         public string PassengerSurname { get; set; }
 
         [Required(ErrorMessage = "Yolcu TC No Giriniz")]
-        public char TCNo { get; set; }
+        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Geçerli TC Değil")]
+        public string TCNo { get; set; }
     }
 }

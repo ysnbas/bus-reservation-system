@@ -1,32 +1,37 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using otobusrezervasyonsistemi.Models;
-using System.Diagnostics;
 
 namespace otobusrezervasyonsistemi.Controllers
 {
     public class TicketController : Controller
     {
-        private readonly ILogger<TicketController> _logger;
 
-        public TicketController(ILogger<TicketController> logger)
+        private readonly MyDbContext _dbContext;
+
+        public TicketController(MyDbContext dbContext)
         {
-            _logger = logger;
+            _dbContext = dbContext;
         }
 
         public IActionResult Index()
         {
+
             return View();
         }
 
-        public IActionResult Privacy()
+        [HttpPost]
+        public async Task<IActionResult> Index(Tickets ticket)
         {
+
+            if (ModelState.IsValid)
+            {
+                _dbContext.Tickets.Add(ticket);
+                await _dbContext.SaveChangesAsync();
+
+                return RedirectToAction("Index", "MyTicket");
+            }
             return View();
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
     }
 }
